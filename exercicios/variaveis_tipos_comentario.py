@@ -9,25 +9,25 @@
    e as melhores coisas
    não tem logica"""
 
-
 #3. Escreva um programa que mostra em tela a mensagem: Boa tarde pessoal da disciplina de Programação II.
- print("Boa tarde pessoal da disciplina de Programação II")
+print("Programação II")
 
 #4. Crie 03 variáveis com três tipos de dados diferentes, observando a sintaxe da linguagem Python.
-    num1=1
-    palavra=input("olá mundo")
-    numero_digitado_por_usuario=int(input("Digire um numero:  "))
+
+ano = 1050 
+nome= 'kaua' 
+num= 550.5  
+
     
 #5. Defina uma variável que exiba em tela o valor e o tipo de dado dessa variável.
-num0=5
-print("O valor é: ",num0)
-
-               ###Como faz para aparecer o dado da variavel?
+valor = 10
+nome = 'maça'
+quant = 1
+print(f"{quant} {nome} custa {valor}")
 
 #6. Solicite para que o usuário digite um número, em seguida exiba em tela o número digitado.
 numero_digitado=int(input("Digite um numero: \n"))
 print("Você digitou:", numero_digitado)
-
 
 #7. Crie duas variáveis. Atribua valores numéricos a elas. Some os valores dessas variáveis. Por fim exiba em tela o resultado da soma.
 variavel1= 5
@@ -41,14 +41,14 @@ variavel2=7
 subtracao= variavel1-variavel2
 print("A subtração é de:", subtracao)
 
-#9. Crie duas variáveis. Atribua valores numéricos a elas. Multiplique os valores dessas variáveis. Por fim exiba em tela o resultado da multiplicação.
-variavel1= 5
-variavel2=7
-multi= variavel1*variavel2
-print("A soma é de:" ,multi)
+#9. Crie duas variáveis. Atribua valores numéricos a elas. Multiplique os valores dessas variáveis. Por fim exiba em tela o resultado da variavel1= 5
+variavel3=2
+variavel4=7
+multi= variavel3* variavel4
+print("A multiplicação é de:" ,multi)
 
 #10. Crie duas variáveis. Atribua valores numéricos a elas. Divida os valores dessas variáveis. Por fim exiba em tela o resultado da divisão.
-variavel1= 5
-variavel2=7
-divisao= variavel1/variavel2
-print("A soma é de:" ,divisao)
+variavel5= 5
+variavel6=7
+divisao= variavel5/variavel6
+print("A divisão é de:" ,divisao)
