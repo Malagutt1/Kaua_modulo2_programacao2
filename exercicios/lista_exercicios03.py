@@ -83,8 +83,8 @@ import random
 tamanho=int(input("Informe a quantidade de caracteres: "))
 uuid_gerador_senha= "bfb773b4093a47549d103888e0dcea5d7e5dd88bb7d240518e5362693319b41cf0d1002d5f8f44f8865a4cb50964c37ab9499b01c04441ef80f8628a931aa3f217000ab30e9d4b3eaa5a22186559a1a4"
 senha_gerada= " ". join(random.sample(uuid_gerador_senha, tamanho))
-print(f"senha gerada com {uuid_gerador_senha}")
-#Erro linha 86
+print(f"senha gerada com {senha_gerada}")
+
 """5) Crie um programa que mostra a data atual, no formato: dia/mês/ano
 hora:minuto:segundo. Funções da Biblioteca Padrão do Python:
 https://docs.python.org/pt-br/3/library/ poderão ser utilizadas."""
