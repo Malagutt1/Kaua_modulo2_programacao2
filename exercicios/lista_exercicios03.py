@@ -89,5 +89,6 @@ print(f"senha gerada com {senha_gerada}")
 hora:minuto:segundo. Funções da Biblioteca Padrão do Python:
 https://docs.python.org/pt-br/3/library/ poderão ser utilizadas."""
 print("\n\nQUESTÃO 05")
-
-
+import datetime 
+agora= datetime.datetime.now()
+print(agora.strftime("%d/%m/%y  %h:%M:%S"))
