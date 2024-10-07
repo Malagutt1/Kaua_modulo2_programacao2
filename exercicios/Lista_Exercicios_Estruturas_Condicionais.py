@@ -37,6 +37,7 @@ elif escolha==3:
     print("Seu medico escolhido foi: Dr. Lucas Pereira")
 else: print("Nenhum medico escolhido!")
 
+
 """3) Escreva um programa que verifica se uma determinada palavra consta
 em um texto de origem. O texto não será conhecido pelo usuário que
 usará de palavras aleatórias na tentativa de adivinhar que palavras
@@ -48,11 +49,10 @@ na documentação:
 https://docs.python.org/3/library/stdtypes.html"""
 print("\n3º exercicio")
 texto= "python é uma excelente linguagem de programação!!!"
-palavra=input("Insira uma palavra para procurar no texto")
-if texto.find(palavra):
+palavra=input("Insira uma palavra para procurar no texto").lower()
+if texto.find(palavra)!= -1:
     print(f"A palavra {palavra} esta no texto!") 
 else: print(f"A palavra {palavra} não esta no texto!")
-#A palavra que está no texto diz que que não esta, a palavra que não está no texto diz que esta.
 
 
 """4) Crie um programa que leia um número e verifique se ele é par ou ímpar."""
