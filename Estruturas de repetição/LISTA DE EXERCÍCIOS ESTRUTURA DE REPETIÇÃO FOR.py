@@ -4,12 +4,15 @@ orientação horizontal quanto na vertical."""
 print("exercicio 1")
 for item_da_lista in "Instituto Federal de Santa Catarina":
     print(item_da_lista)
-    
+    mostrar_na_horizontal= ""
+for item_da_lista in "Instituto Federal de Santa Catarina":
+    mostrar_na_horizontal=mostrar_na_horizontal + item_da_lista
+print(mostrar_na_horizontal)
 
 """2) Crie um programa que realiza a contagem de 0 a 20, exibindo apenas os
 números pares."""
 print("exercicio 2")
-for par in range(0,21,2):
+for par in range(0,21,2): 
     print(par)
 
 """3) Crie um programa que exiba na tela a tabuada de um determinado número
@@ -21,17 +24,27 @@ for i in range(1,11):
     print(f"Tabuada= {tabuada_do_usuario}x{i}={tabuada} ")
 
 """4) Crie um programa que realiza a contagem regressiva de 20 segundos."""
-print("exercicio 4")
-for cont_regressiva in range(0,21,-1):
+print("exercicio 4") 
+"""import time
+for cont_regressiva in range(20,0,-1):
     print("Contagem regressiva:")
     print(cont_regressiva)
+    time.sleep(1) 
+print("Seu tempo acabou!") """   #tirar aspas pois estava com o contador de 20 segundos
 
 """5) Crie um programa que realiza a contagem de 1 até 100, considerando
 apenas os números ímpares. Exiba na tela quantos números ímpares
 foram encontrados nesse intervalo e qual a soma desses números
 ímpares."""
 print("exercicio 5")
-
+num_impar=0
+soma=0
+for num in range(1,101):
+    
+    soma+=num
+    num_impar+=1
+print(num_impar)
+print(num)
 """6) Crie um programa que pede ao usuário que digite um número qualquer,
 em seguida retorne se esse número é primo ou não, caso não, retorne
 também quantas vezes esse número é divisível."""
