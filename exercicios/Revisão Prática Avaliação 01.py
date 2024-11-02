@@ -77,14 +77,29 @@ while i<=numero11:
 """12. Crie um programa que leia a temperatura em graus Celsius e converta para
 Fahrenheit. Expressão de conversão: (celsius * 9/5) + 32."""
 print("Código 12: Converte temperatura de Celsius para Fahrenheit.")
+graus_celcius=float(input("Insira a temperatura em graus Celsius:\t"))
+Fahrenheit=(graus_celcius* 9/5)+32
+print(f"A temperatura em Fahrenheit é de {Fahrenheit}")
 
 """13. Escreva um programa que peça o nome e a idade de uma pessoa e exiba uma
 mensagem de boas-vindas personalizada."""
 print("Código 13: Exibe uma mensagem de boas-vindas personalizada.")
-
+nome_do_usuario=input("Olá, qual seu nome?   ")
+idade_do_usuario=int(input("Insira sua idade por gentileza"))
+if idade_do_usuario<=15 and idade_do_usuario>=0:
+    print(f"Olá {nome_do_usuario},tudo bem? seja bem vindo")
+elif idade_do_usuario>15 and idade_do_usuario<18:
+    print(f"Olá {nome_do_usuario},tudo bem? Já tá ficando maior de idade ")
+elif idade_do_usuario>=18:
+    print(f"Olá {nome_do_usuario},tudo certo campeão(campeã)? como vai a vida, seja muito bem vindo! ")
+    
 """14. Crie um programa que leia dois números e exiba o resultado da multiplicação entre
 eles."""
 print("Código 14: Multiplica dois números fornecidos pelo usuário.")
+multipliacacao_numero1= int(input("Insira o primeiro numero para multiplicação:   "))
+multiplicacao_numero2= int(input("Insira o segundo numero para multiplicação:   "))
+multiplicacao=multipliacacao_numero1*multiplicacao_numero2
+print (multiplicacao)
 
 """15. Faça um programa que leia três números e exiba o menor deles."""
 print("Código 15: Exibe o menor de três números.")
@@ -92,12 +107,25 @@ print("Código 15: Exibe o menor de três números.")
 """16. Escreva um programa que leia a nota de um aluno e verifique se ele foi aprovado
 (nota >= 6)."""
 print("Código 16: Verifica se um aluno foi aprovado com nota >= 6.")
+nota_aluno=float(input("Insira a nota de um aluno: "))
+if nota_aluno>=0 and nota_aluno <= 6: 
+    print("O aluno não passou! REPROVADO")
+elif nota_aluno>=6 and nota_aluno<=10:
+    print("O aluno  passou! AREPROVADO")
+else: print("Informe um numero correto!")
 
 """17. Crie um programa que leia o peso e a altura de uma pessoa e calcule seu IMC."""
 print("Código 17: Calcula o IMC com base no peso e altura fornecidos.")
 
+
 """18. Faça um programa que leia um número e exiba sua tabuada (de 1 a 10)."""
 print("Código 18: Exibe a tabuada de um número fornecido.")
+tabuada_laço=1
+tabuada_num=int(input("Insira um numero para tabela: "))
+while tabuada_laço<=10:
+    tabuada= tabuada_num *tabuada_laço
+    print (f"{tabuada_num}x{tabuada_laço}= {tabuada}")
+    tabuada_laço+=1
 
 """19. Crie um programa que conte de 1 até 100 e exiba apenas os números pares."""
 print("Código 19: Exibe apenas os números pares de 1 a 100.")
