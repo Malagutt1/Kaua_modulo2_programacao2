@@ -25,26 +25,26 @@ for i in range(1,11):
 
 """4) Crie um programa que realiza a contagem regressiva de 20 segundos."""
 print("exercicio 4") 
-"""import time
+import time
 for cont_regressiva in range(20,0,-1):
     print("Contagem regressiva:")
     print(cont_regressiva)
-    time.sleep(1) 
-print("Seu tempo acabou!") """   #tirar aspas pois estava com o contador de 20 segundos
+    """time.sleep(1)"""  #tirar aspas pois estava com o contador de 20 segundos
+print("Seu tempo acabou!")   
 
 """5) Crie um programa que realiza a contagem de 1 até 100, considerando
 apenas os números ímpares. Exiba na tela quantos números ímpares
 foram encontrados nesse intervalo e qual a soma desses números
 ímpares."""
 print("exercicio 5")
-num_impar=0
-soma=0
+num_impar  =0
+soma       =0
 for num in range(1,101):
-    
-    soma+=num
-    num_impar+=1
+    if num % 2 != 0:
+        num_impar+=1
+        soma+=num
 print(num_impar)
-print(num)
+print(soma)
 """6) Crie um programa que pede ao usuário que digite um número qualquer,
 em seguida retorne se esse número é primo ou não, caso não, retorne
 também quantas vezes esse número é divisível."""
