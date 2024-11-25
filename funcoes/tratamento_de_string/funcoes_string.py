@@ -92,9 +92,135 @@ else:
 
 '''5. Crie uma função que implemente a questão 1 da avaliação01 teórico-prática.'''
 print("questão 5")
+OPCAO_SINTAXE                  = 1
+OPCAO_SEMANTICA                = 2
+OPCAO_LACO_INFINITO            = 3
+OPCAO_VARIAVEL                 = 4
+
+CONCEITO_TEORICO_SINTAXE       = """\"Sintaxe é o conjunto de regras e estruturas que definem como o código deve ser escrito.\""""
+CONCEITO_TEORICO_SEMANTICA     = """\"Semântica diz respeito ao significado das instruções\estruturas de uma linguagem de programação. Aquilo que faz sentido dentro da linguagem.\""""
+CONCEITO_TEORICO_LACO_INFINITO = """\"Um laço infinito é uma condição de erro que pode ocorrer nas estruturas de repetição das linguagens de programação. 
+Acontece quando o controle do laço nunca se torna falso, fazendo com que o laço de repetição execute infinitamente. Isso 
+causa um consumo elevado dos recursos de máquina e o travamento do programa. A correta atualização do controle do laço, 
+sua verificação a cada iteração e a garantia de que uma condição de parada será alcançada, são medidas para evitar que  
+a condição de laço infinito aconteça.\""""
+
+CONCEITO_TEORICO_VARIAVEL      = """\"Variável, em linguagem de programação, é um espaço de memória do computador usado para armazenar um valor, de
+forma temporária, que pode ser alterado durante a execução do programa.\""""
+
+def conceitosTeoricosLinguagensProgramacao(CodigoConceitoTeorico):
+    
+    if int(opcaoDigitadaPeloUsuario) ==  OPCAO_SINTAXE :
+        return CONCEITO_TEORICO_SINTAXE
+            
+    elif int(opcaoDigitadaPeloUsuario) == OPCAO_SEMANTICA :
+        return CONCEITO_TEORICO_SEMANTICA
+        
+    elif int(opcaoDigitadaPeloUsuario) == OPCAO_LACO_INFINITO :
+        return CONCEITO_TEORICO_LACO_INFINITO
+        
+    elif int(opcaoDigitadaPeloUsuario) == OPCAO_VARIAVEL :
+        return CONCEITO_TEORICO_VARIAVEL
+    
+    else:
+        return ""        
+    
+
+def menuDeOpcoes():
+    print("\n" + """ 1 - Sintaxe \n 2 - Semântica \n 3 - Laço Infinito \n 4 - Variável \n Sair \n""")
+
+def validarCodigoConceitoInformado(codigoConceitoTeorico):
+    opcaoValida = True
+    
+    if not opcaoDigitadaPeloUsuario.strip().isnumeric():
+        opcaoValida = False
+    else:
+        if (int(codigoConceitoTeorico) != OPCAO_SINTAXE and int(codigoConceitoTeorico) != OPCAO_SEMANTICA
+            and int(codigoConceitoTeorico) != OPCAO_LACO_INFINITO and int(codigoConceitoTeorico) != OPCAO_VARIAVEL):    
+            opcaoValida = False
+        
+    return opcaoValida    
+    
+
+opcaoDigitadaPeloUsuario       = ""
+usuarioDigitouSair             = False
+
+while not usuarioDigitouSair:
+    opcaoDigitadaPeloUsuario = input("Informe a opção de menu desejada: ")    
+    
+    #if opcaoDigitadaPeloUsuario.strip().isnumeric() == True :
+    if validarCodigoConceitoInformado(opcaoDigitadaPeloUsuario):        
+        print("\n" + conceitosTeoricosLinguagensProgramacao(opcaoDigitadaPeloUsuario) + "\n") 
+    else:
+        
+        if opcaoDigitadaPeloUsuario.upper() == "SAIR" :
+            #Atualiza o controle do laço para finalizar o programa
+            usuarioDigitouSair = True
+                
+        else:
+            print(f"Opção inválida. A opção \"{opcaoDigitadaPeloUsuario}\" não existe no menu de opções.\n")
+            
+            #Exibe o menu de opções novamente
+            menuDeOpcoes()
 
 '''6. Crie uma função que implemente a questão 4 da avaliação01 teórico-prática.'''
 print("questão 6")
+import re
+def validarTamanhoSenha(senhaInformada):
+    senhaComTamanhoCorreto = True
+    
+    tamanhoDaSenha = len(senhaInformada)
+    
+    if tamanhoDaSenha < 6:
+        senhaComTamanhoCorreto = False
+    elif tamanhoDaSenha > 20:
+        senhaComTamanhoCorreto = False
+        
+    return senhaComTamanhoCorreto
+
+def validarCaracteresMinusculos(senhaInformada):
+    #"[a-z]" expressão regular que valida se a senha tem PELO MENOS UMA LETRA MINUSCULA
+    return re.search("[a-z]", senhaInformadaPeloUsuario) != None
+
+def validarCaracteresMaiusculos(senhaInformada):
+    #"[A-Z]" expressão regular que valida se a senha tem PELO MENOS UMA LETRA MAIUSCULA 
+    return re.search("[A-Z]", senhaInformadaPeloUsuario) != None
+
+def validarCaracteresNumericos(senhaInformada):
+    #"[0-9]" expressão regular que valida se a senha tem PELO MENOS UM NÚMERO
+    return re.search("[0-9]", senhaInformadaPeloUsuario) != None
+
+def validarCaracteresEspeciais(senhaInformada, listaDeCaracteresEspeciais):
+    #"[$#@!&]" expressão regular que valida se a senha tem PELO MENOS UM CARACTER ESPECIAL que consta na lista 
+    return re.search(listaDeCaracteresEspeciais, senhaInformada) != None
+
+def validarCaracteresWhiteSpace(senhaInformada):
+    #\s verifica se existem caracteres “whitespace” na senha, o que não é permitido
+    return re.search("\s", senhaInformadaPeloUsuario) != None
+    
+ 
+senhaInformadaPeloUsuario = input('Digite uma senha para ser validada: ')
+
+if not validarTamanhoSenha(senhaInformadaPeloUsuario, SEIS_CARACTERES, VINTE_CARACTERES):
+    print(f"A senha deve ter no mínimo {SEIS_CARACTERES} caracteres e no mximo {VINTE_CARACTERES}")
+
+elif not validarCaracteresMinusculos(senhaInformadaPeloUsuario):
+    print('A senha deve ter ao menos uma letra minuscula') 
+
+elif not validarCaracteresNumericos(senhaInformadaPeloUsuario):
+    print('A senha deve ter ao menos um numero') 
+
+elif not validarCaracteresMaiusculos(senhaInformadaPeloUsuario):
+    print('A senha deve ter ao menos uma letra maiuscula') 
+
+elif not validarCaracteresEspeciais(senhaInformadaPeloUsuario, "[$#@!&]"):
+    print('A senha deve ter ao menos um caractere especial do conjunto: $#@!&') 
+
+elif validarCaracteresWhiteSpace(senhaInformadaPeloUsuario):
+    print("Caracteres do tipo \"whitespace\" não são permitidos: espaço em branco, "
+            + "tabulações (\\t), quebra de linha (\\n), retorno do carro (\\r), etc…")
+else:
+    print('Senha validada com sucesso!')    
 
 '''7. Crie uma função que receba uma String, toda em letras minúsculas, e retorne essa
 mesma String passada como parâmetro com a primeira letra de cada palavra em
