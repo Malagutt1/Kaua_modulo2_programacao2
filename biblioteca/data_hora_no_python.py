@@ -16,3 +16,7 @@ print(data_hora)
 print("obeter data")
 data=datetime.now().date()
 print(data)
+
+print("represente o horario '14:30:59' ")
+horario_especifico=time(14, 30, 59)
+print(horario_especifico)
