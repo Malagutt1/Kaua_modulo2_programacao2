@@ -200,7 +200,8 @@ def validarCaracteresWhiteSpace(senhaInformada):
     
  
 senhaInformadaPeloUsuario = input('Digite uma senha para ser validada: ')
-
+SEIS_CARACTERES=6
+VINTE_CARACTERES=20
 if not validarTamanhoSenha(senhaInformadaPeloUsuario, SEIS_CARACTERES, VINTE_CARACTERES):
     print(f"A senha deve ter no mínimo {SEIS_CARACTERES} caracteres e no mximo {VINTE_CARACTERES}")
 
