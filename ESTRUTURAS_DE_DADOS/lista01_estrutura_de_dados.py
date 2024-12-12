@@ -137,12 +137,16 @@ def adivinha():
         adivinha_usuario=input("Digite o nome de uma linguagem de programação para tentar adivinhar\n    ").lower()
         if adivinha_usuario in linguagens_de_programacao:
             return(f" A linguagem {adivinha_usuario} estava no texto!")
-return_adivinha= adivinha()
-print(return_adivinha)
+        else: 
+            return(f" A linguagem {adivinha_usuario} NÃo estava no texto!")
+            
+
+
 while True:
     continuar_jogando= input("Continuar jogando?").lower()
     if continuar_jogando=="sim":
-        adivinha()
+        return_adivinha= adivinha()
+        print(return_adivinha)
     elif continuar_jogando=="não":
         break
 
