@@ -43,7 +43,22 @@ itens_tupla_questao_01(lista_estacoes)
 dados criadas e inicializadas nas questões 1 e 2."""
 print("Questão 03: Tamanho e elementos das questões 01 e 02")
 # O que é para eu fazer? Não entendi (primeiro, terceiro e ultimo).
-
+def primeiro_terceiro_ultimo_item_da_lista(lista):
+    print(lista[0])
+    print(lista[2])
+    print(lista[-1])
+print("Primeiro, terceiro e ultimo (Tupla dia da semana)")
+primeiro_terceiro_ultimo_item_da_lista(tupla_dia_da_semana)
+print("\nPrimeiro, terceiro e ultimo (Tupla meses)")
+primeiro_terceiro_ultimo_item_da_lista(tupla_meses)
+print("\nPrimeiro, terceiro e ultimo (Tupla estações do ano)")
+primeiro_terceiro_ultimo_item_da_lista(tupla_estacoes)
+print("\nPrimeiro, terceiro e ultimo (Lista dia da semana)")
+primeiro_terceiro_ultimo_item_da_lista(lista_dia_da_semana)
+print("\nPrimeiro, terceiro e ultimo (Lista meses)")
+primeiro_terceiro_ultimo_item_da_lista(lista_meses)
+print("\nPrimeiro, terceiro e ultimo (Lista estações do ano)")
+primeiro_terceiro_ultimo_item_da_lista(lista_estacoes)
 
 """4. Crie uma lista de compras de supermercado com 15 itens. Através de um
 laço de repetição, exiba na tela, cada um dos itens dessa lista de compras.
@@ -122,7 +137,6 @@ def adivinha():
         adivinha_usuario=input("Digite o nome de uma linguagem de programação para tentar adivinhar\n    ").lower()
         if adivinha_usuario in linguagens_de_programacao:
             return(f" A linguagem {adivinha_usuario} estava no texto!")
-
 return_adivinha= adivinha()
 print(return_adivinha)
 while True:
