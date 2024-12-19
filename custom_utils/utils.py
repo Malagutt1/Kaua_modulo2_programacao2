@@ -209,15 +209,15 @@ def validarTamanhoSenha(senhaInformada):
 
 def validarCaracteresMinusculos(senhaInformada):
     #"[a-z]" expressão regular que valida se a senha tem PELO MENOS UMA LETRA MINUSCULA
-    return re.search("[a-z]", senhaInformadaPeloUsuario) != None
+    return re.search("[a-z]", senhaInformada) != None
 
 def validarCaracteresMaiusculos(senhaInformada):
     #"[A-Z]" expressão regular que valida se a senha tem PELO MENOS UMA LETRA MAIUSCULA 
-    return re.search("[A-Z]", senhaInformadaPeloUsuario) != None
+    return re.search("[A-Z]", senhaInformada) != None
 
 def validarCaracteresNumericos(senhaInformada):
     #"[0-9]" expressão regular que valida se a senha tem PELO MENOS UM NÚMERO
-    return re.search("[0-9]", senhaInformadaPeloUsuario) != None
+    return re.search("[0-9]", senhaInformada) != None
 
 def validarCaracteresEspeciais(senhaInformada, listaDeCaracteresEspeciais):
     #"[$#@!&]" expressão regular que valida se a senha tem PELO MENOS UM CARACTER ESPECIAL que consta na lista 
@@ -225,7 +225,7 @@ def validarCaracteresEspeciais(senhaInformada, listaDeCaracteresEspeciais):
 
 def validarCaracteresWhiteSpace(senhaInformada):
     #\s verifica se existem caracteres “whitespace” na senha, o que não é permitido
-    return re.search("\s", senhaInformadaPeloUsuario) != None
+    return re.search("\s", senhaInformada) != None
 
 
 def primeiraLetraMaiuscula(nomeMinusculo):
