@@ -1,1 +1,13 @@
-__pycache__/*
+# teste_01/    : Ignora a pasta "teste_01" e todos os arquivos e subpastas dentro dela
+# teste_01/*   : Ignora todos os arquivos dentro de "teste_01", mas mantém a pasta
+# *.pyc        : Ignora todos os arquivos com a extensão ".pyc"
+# no?e.txt    : Ignora arquivos com um único caractere após "nome", como "nome1.txt" ou "nomeA.txt"
+# ??me.txt   : Ignora arquivos com exatamente dois caracteres após "nome", como "nome01.txt" ou "nomeAB.txt"
+# teste_[1-9].py : Ignora arquivos com números de 1 a 9 após "teste_", como "teste_1.py" até "teste_9.py"
+# !teste_01/   : Exclui a pasta "teste_01" da lista de ignorados, mantendo-a no repositório
+# !teste_01.txt: Exclui o arquivo "teste_01.txt" da lista de ignorados, mantendo-o no repositório
+
+
+
+#remoção do __pycache__ do diretorio do git  (para pastas se utiliza somente o nome do arquivo)
+__pycache__/
