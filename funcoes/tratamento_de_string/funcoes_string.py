@@ -17,7 +17,7 @@ print("questão 1")
 nome_da_musica=('Que Bonita a Sua Roupa (Chaves)')
 letra_da_musica=('Que bonita a sua roupa, que roupinha muito louca, nela é tudo remendado, não vale nenhum centavo, mas agrada a quem olhar! Eu sou o famoso Chaves, todos dizem que minha roupa é remendada, que faço tremer as bases com minhas peraltices preparadas; dizem a todo instante que ele é mais espaçoso que um trem, que ela é azul... crinante, e que tão chata como ela não há ninguém; o Professor visita a vila procurando casamento, e o Seu Madruga não evita levar um tabefe a todo momento; a Popis é muito boba, pra Dona Clotilde só falta uma escova, o Nhonho não se manca, do Seu Barriga leva sempre uma bronca!')
 #chamar a função
-tamanho_da_string=utils.calcular_tamanho_da_string(letra_da_musica)
+tamanho_da_string= utils.calcular_tamanho_da_string(letra_da_musica)
 if tamanho_da_string<0:
     print("Entrada de dados invalida!")
 else:
@@ -88,7 +88,7 @@ usuarioDigitouSair             = False
 while not usuarioDigitouSair:
     opcaoDigitadaPeloUsuario = input("Informe a opção de menu desejada: ")    
     
-    if utils.validarCodigoConceitoInformado(opcaoDigitadaPeloUsuario):        
+    if utils.validarCodigoConceitoInformado(opcaoDigitadaPeloUsuario, opcaoDigitadaPeloUsuario):        
         print("\n" + utils.conceitosTeoricosLinguagensProgramacao(opcaoDigitadaPeloUsuario) + "\n") 
     else:
         

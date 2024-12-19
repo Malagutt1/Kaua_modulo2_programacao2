@@ -1,3 +1,4 @@
+#####################################################ESTRUTURAS_DE_DADOS#####################################################
 """1. Crie 03 variáveis do tipo tupla que contenham: os dias da semana, os meses
 do ano, as estações do ano. Crie uma função, que tenha 1 parâmetro, que
 imprima na tela os valores definidos em cada uma das tuplas."""
@@ -80,16 +81,6 @@ def adivinha(linguagens_de_programacao):
         else: 
             return(f" A linguagem {adivinha_usuario} NÃo estava no texto!")
             
-
-
-#while True:
-#    continuar_jogando= input("Continuar jogando?").lower()
-#    if continuar_jogando=="sim":
-#        return_adivinha= adivinha()
-#        print(return_adivinha)
-#    elif continuar_jogando=="não":
-#        break
-
 """7. Crie um programa que possa marcar uma consulta médica. Utilize uma
 estrutura de dados para armazenar o nome dos médicos que atendem na
 clínica. Solicite ao usuário que informe com qual profissional deseja marcar
@@ -116,7 +107,136 @@ def marcar_consulta():
         return(f"A consulta foi marcada com exito com {marcar_consulta_com_dr}!")
     else: return(f"Não foi possivel marcar consulta com {marcar_consulta_com_dr}. O nome pode ter sido digitado incorretamente ou não está na lista.")
     
+    
+#####################################################FUNCOES_STRING#####################################################
+OPCAO_SINTAXE                  = 1
+OPCAO_SEMANTICA                = 2
+OPCAO_LACO_INFINITO            = 3
+OPCAO_VARIAVEL                 = 4
+CONCEITO_TEORICO_SINTAXE       = """\"Sintaxe é o conjunto de regras e estruturas que definem como o código deve ser escrito.\""""
+CONCEITO_TEORICO_SEMANTICA     = """\"Semântica diz respeito ao significado das instruções\estruturas de uma linguagem de programação. Aquilo que faz sentido dentro da linguagem.\""""
+CONCEITO_TEORICO_LACO_INFINITO = """\"Um laço infinito é uma condição de erro que pode ocorrer nas estruturas de repetição das linguagens de programação. 
+Acontece quando o controle do laço nunca se torna falso, fazendo com que o laço de repetição execute infinitamente. Isso 
+causa um consumo elevado dos recursos de máquina e o travamento do programa. A correta atualização do controle do laço, 
+sua verificação a cada iteração e a garantia de que uma condição de parada será alcançada, são medidas para evitar que  
+a condição de laço infinito aconteça.\""""
 
-#medicos_escolhidos=nome_medicos()
-#print(medicos_escolhidos)
+CONCEITO_TEORICO_VARIAVEL      = """\"Variável, em linguagem de programação, é um espaço de memória do computador usado para armazenar um valor, de
+forma temporária, que pode ser alterado durante a execução do programa.\""""
 
+
+
+
+def calcular_tamanho_da_string(letra_da_musica):  #função principal
+    if (type(letra_da_musica)==str):
+        return len(letra_da_musica)
+    else:
+        return -1
+    
+
+def obter_caracter(string, indice):
+    # Verificador de indice
+    if indice < 0 or indice >= len(string):
+        return -1
+    return string[indice-1]
+def principal():
+    string_analise = input("Digite a string: ")
+    
+    try:
+        posicao_caracter = int(input("Digite o índice da letra que você quer saber: "))
+    except ValueError:
+        print("Erro: o índice deve ser um número inteiro.")
+        return
+    
+    resultado = obter_caracter(string_analise, posicao_caracter)
+    
+    if resultado == -1:
+        print(f"Índice fora do intervalo. A String não possui o índice {posicao_caracter}.")
+    else:
+        print(f"O caractere na posição {posicao_caracter} é '{resultado}'.")
+        
+        
+def finalFrase(frase, terminoFrase):
+    return frase.endswith(terminoFrase)
+
+
+def conceitosTeoricosLinguagensProgramacao(CodigoConceitoTeorico, opcaoDigitadaPeloUsuario):
+    
+    if int(opcaoDigitadaPeloUsuario) ==  OPCAO_SINTAXE :
+        return CONCEITO_TEORICO_SINTAXE
+            
+    elif int(opcaoDigitadaPeloUsuario) == OPCAO_SEMANTICA :
+        return CONCEITO_TEORICO_SEMANTICA
+        
+    elif int(opcaoDigitadaPeloUsuario) == OPCAO_LACO_INFINITO :
+        return CONCEITO_TEORICO_LACO_INFINITO
+        
+    elif int(opcaoDigitadaPeloUsuario) == OPCAO_VARIAVEL :
+        return CONCEITO_TEORICO_VARIAVEL
+    
+    else:
+        return ""        
+    
+
+def menuDeOpcoes():
+    print("\n" + """ 1 - Sintaxe \n 2 - Semântica \n 3 - Laço Infinito \n 4 - Variável \n Sair \n""")
+
+def validarCodigoConceitoInformado(codigoConceitoTeorico, opcaoDigitadaPeloUsuario):
+    opcaoValida = True
+    
+    if not opcaoDigitadaPeloUsuario.strip().isnumeric():
+        opcaoValida = False
+    else:
+        if (int(codigoConceitoTeorico) != OPCAO_SINTAXE and int(codigoConceitoTeorico) != OPCAO_SEMANTICA
+            and int(codigoConceitoTeorico) != OPCAO_LACO_INFINITO and int(codigoConceitoTeorico) != OPCAO_VARIAVEL):    
+            opcaoValida = False
+        
+    return opcaoValida
+
+
+import re
+def validarTamanhoSenha(senhaInformada):
+    senhaComTamanhoCorreto = True
+    
+    tamanhoDaSenha = len(senhaInformada)
+    
+    if tamanhoDaSenha < 6:
+        senhaComTamanhoCorreto = False
+    elif tamanhoDaSenha > 20:
+        senhaComTamanhoCorreto = False
+        
+    return senhaComTamanhoCorreto
+
+def validarCaracteresMinusculos(senhaInformada):
+    #"[a-z]" expressão regular que valida se a senha tem PELO MENOS UMA LETRA MINUSCULA
+    return re.search("[a-z]", senhaInformadaPeloUsuario) != None
+
+def validarCaracteresMaiusculos(senhaInformada):
+    #"[A-Z]" expressão regular que valida se a senha tem PELO MENOS UMA LETRA MAIUSCULA 
+    return re.search("[A-Z]", senhaInformadaPeloUsuario) != None
+
+def validarCaracteresNumericos(senhaInformada):
+    #"[0-9]" expressão regular que valida se a senha tem PELO MENOS UM NÚMERO
+    return re.search("[0-9]", senhaInformadaPeloUsuario) != None
+
+def validarCaracteresEspeciais(senhaInformada, listaDeCaracteresEspeciais):
+    #"[$#@!&]" expressão regular que valida se a senha tem PELO MENOS UM CARACTER ESPECIAL que consta na lista 
+    return re.search(listaDeCaracteresEspeciais, senhaInformada) != None
+
+def validarCaracteresWhiteSpace(senhaInformada):
+    #\s verifica se existem caracteres “whitespace” na senha, o que não é permitido
+    return re.search("\s", senhaInformadaPeloUsuario) != None
+
+
+def primeiraLetraMaiuscula(nomeMinusculo):
+    nomeMinusculo = nomeMinusculo.lower()
+    return nomeMinusculo.title()
+
+
+def inserir_caracter(string, caracter):
+    return caracter.join(string)
+
+
+def exibirCaracteresString(stringCaracteres):
+    for contador in range(len(stringCaracteres)):
+        print(f"{stringCaracteres[contador]} - {contador + 1}º caracter da String \"{stringCaracteres}\"")
