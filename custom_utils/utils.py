@@ -1,4 +1,3 @@
-from custom_utils import utils
 """1. Crie 03 variáveis do tipo tupla que contenham: os dias da semana, os meses
 do ano, as estações do ano. Crie uma função, que tenha 1 parâmetro, que
 imprima na tela os valores definidos em cada uma das tuplas."""
@@ -7,9 +6,10 @@ tupla_meses= ("Janeiro", "Fevereiro", "Março", "Abril", "Março", "Abril", "Mai
 tupla_estacoes= ("verão", "outono", "inverno", "primavera\n")
 
 def itens_tupla_questao_01(tupla):
+    print(tupla)
     for i in tupla:
         print(i)
-    return
+  
 
 """2. Crie 03 variáveis do tipo lista que contenham: os dias da semana, os meses
 do ano, as estações do ano. Crie uma função, que tenha 1 parâmetro, que
@@ -24,7 +24,7 @@ def itens_lista_questao_02(lista):
 
 """3. Exiba o tamanho e os elementos: primeiro, terceiro e último das estruturas de
 dados criadas e inicializadas nas questões 1 e 2."""
-print("Questão 03: Tamanho e elementos das questões 01 e 02")
+
 
 def primeiro_terceiro_ultimo_item_da_lista(lista):
     print(lista[0])

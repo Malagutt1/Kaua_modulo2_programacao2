@@ -1,11 +1,13 @@
 import sys
 sys.path.append(".")
 sys.path.append("../custom_utils/utils")
+
 from custom_utils import utils
 
 tupla_dia_da_semana= ("Domingo","Segunda", "terça", "Quarta", "Quinta", "Sexta", "Sabado\n")
 tupla_meses= ("Janeiro", "Fevereiro", "Março", "Abril", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro\n") 
 tupla_estacoes= ("verão", "outono", "inverno", "primavera\n")
+
 print("Questão 01: 3 variaveis do tipo tupla")
 print("Dia da semana:")
 utils.itens_tupla_questao_01(tupla_dia_da_semana)
@@ -105,9 +107,6 @@ while True:
 
 
 print("Questão 07: Marcar consulta com medico(a)\n")
-
-    
-
 medicos_escolhidos=utils.nome_medicos()
 print(medicos_escolhidos)
 
