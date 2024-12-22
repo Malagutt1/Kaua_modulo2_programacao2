@@ -106,3 +106,18 @@ print("Questão 07: Marcar consulta com medico(a)\n")
 medicos_escolhidos=utils.nome_medicos()
 print(medicos_escolhidos)
 
+############################## CONTINUAÇÃO LISTA01, SÓ QUE COM DICIONARIO ##############################
+
+"""8. Crie um dicionário, baseado nas informações usadas para criar a lista de compras da questão 4, 
+de forma que seja possível definir o preço de cada produto. """
+
+"""9. Baseado no dicionário criado na questão 8, crie um programa que solicite ao usuário que 
+informe o nome de um produto. Se o produto informado pelo usuário estiver na lista de compras do tipo 
+dicionário, exiba a mensagem na tela: "O item {nome do produto} faz parte da lista de compras do supermercado".
+ Senão, exiba a mensagem: "O item {nome do produto} NÃO faz parte da lista de compras do supermercado"."""
+
+"""10. Crie um dicionário que armazene um cadastro para uma loja. Esse cadastro deve conter informações como: 
+nome, idade, sexo, estado civil, nacionalidade, faixa de renda, etc... Exiba na tela tais informações."""
+
+"""11. Crie um programa que receba dados de um aluno como: nome e notas. Cadastre 03 trimestres de informações. 
+Retorne uma nova estrutura de dados que armazene o nome e a média do aluno. Imprima, na tela, as informações dessa nova estrutura de dados."""

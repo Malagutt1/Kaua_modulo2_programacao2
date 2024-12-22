@@ -97,13 +97,11 @@ OPCAO_SEMANTICA                = 2
 OPCAO_LACO_INFINITO            = 3
 OPCAO_VARIAVEL                 = 4
 
-CONCEITO_TEORICO_SINTAXE       = """\"Sintaxe é o conjunto de regras e estruturas que definem como o código deve ser escrito.\""""
-CONCEITO_TEORICO_SEMANTICA     = """\"Semântica diz respeito ao significado das instruções\estruturas de uma linguagem de programação. Aquilo que faz sentido dentro da linguagem.\""""
-CONCEITO_TEORICO_LACO_INFINITO = """\"Um laço infinito é uma condição de erro que pode ocorrer nas estruturas de repetição das linguagens de programação. 
-Acontece quando o controle do laço nunca se torna falso, fazendo com que o laço de repetição execute infinitamente. Isso 
-causa um consumo elevado dos recursos de máquina e o travamento do programa. A correta atualização do controle do laço, 
-sua verificação a cada iteração e a garantia de que uma condição de parada será alcançada, são medidas para evitar que  
-a condição de laço infinito aconteça.\""""
+CONCEITO_TEORICO_SINTAXE       = "Sintaxe é o conjunto de regras e estruturas que definem como o código deve ser escrito."
+CONCEITO_TEORICO_SEMANTICA     = "Semântica diz respeito ao significado das instruções/ estruturas de uma linguagem de programação. Aquilo que faz sentido dentro da linguagem."
+CONCEITO_TEORICO_LACO_INFINITO = "Um laço infinito é uma condição de erro que pode ocorrer nas estruturas de repetição das linguagens de programação. Acontece quando o controle do laço nunca se torna falso, fazendo com que o laço de repetição execute infinitamente. Isso causa um consumo elevado dos recursos de máquina e o travamento do programa. A correta atualização do controle do laço, sua verificação a cada iteração e a garantia de que uma condição de parada será alcançada, são medidas para evitar que a condição de laço infinito aconteça."
+CONCEITO_TEORICO_VARIAVEL      = "Variável, em linguagem de programação, é um espaço de memória do computador usado para armazenar um valor, de forma temporária, que pode ser alterado durante a execução do programa."
+
 
 CONCEITO_TEORICO_VARIAVEL      = """\"Variável, em linguagem de programação, é um espaço de memória do computador usado para armazenar um valor, de
 forma temporária, que pode ser alterado durante a execução do programa.\""""

@@ -73,19 +73,15 @@ OPCAO_SEMANTICA                = 2
 OPCAO_LACO_INFINITO            = 3
 OPCAO_VARIAVEL                 = 4
 
-CONCEITO_TEORICO_SINTAXE       = """\"Sintaxe é o conjunto de regras e estruturas que definem como o código deve ser escrito.\""""
-CONCEITO_TEORICO_SEMANTICA     = """\"Semântica diz respeito ao significado das instruções\estruturas de uma linguagem de programação. Aquilo que faz sentido dentro da linguagem.\""""
-CONCEITO_TEORICO_LACO_INFINITO = """\"Um laço infinito é uma condição de erro que pode ocorrer nas estruturas de repetição das linguagens de programação. 
-Acontece quando o controle do laço nunca se torna falso, fazendo com que o laço de repetição execute infinitamente. Isso 
-causa um consumo elevado dos recursos de máquina e o travamento do programa. A correta atualização do controle do laço, 
-sua verificação a cada iteração e a garantia de que uma condição de parada será alcançada, são medidas para evitar que  
-a condição de laço infinito aconteça.\""""
-CONCEITO_TEORICO_VARIAVEL      = """\"Variável, em linguagem de programação, é um espaço de memória do computador usado para armazenar um valor, de
-forma temporária, que pode ser alterado durante a execução do programa.\""""
+CONCEITO_TEORICO_SINTAXE       = "Sintaxe é o conjunto de regras e estruturas que definem como o código deve ser escrito."
+CONCEITO_TEORICO_SEMANTICA     = "Semântica diz respeito ao significado das instruções/estruturas de uma linguagem de programação. Aquilo que faz sentido dentro da linguagem."
+CONCEITO_TEORICO_LACO_INFINITO = "Um laço infinito é uma condição de erro que pode ocorrer nas estruturas de repetição das linguagens de programação. Acontece quando o controle do laço nunca se torna falso, fazendo com que o laço de repetição execute infinitamente. Isso causa um consumo elevado dos recursos de máquina e o travamento do programa. A correta atualização do controle do laço, sua verificação a cada iteração e a garantia de que uma condição de parada será alcançada, são medidas para evitar que a condição de laço infinito aconteça."
+CONCEITO_TEORICO_VARIAVEL      = "Variável, em linguagem de programação, é um espaço de memória do computador usado para armazenar um valor, deforma temporária, que pode ser alterado durante a execução do programa."
 opcaoDigitadaPeloUsuario       = ""
 usuarioDigitouSair             = False
 
 while not usuarioDigitouSair:
+    utils.menuDeOpcoes()
     opcaoDigitadaPeloUsuario = input("Informe a opção de menu desejada: ")    
     
     if utils.validarCodigoConceitoInformado(opcaoDigitadaPeloUsuario, opcaoDigitadaPeloUsuario):        
@@ -110,7 +106,7 @@ import re
 senhaInformadaPeloUsuario = input('Digite uma senha para ser validada: ')
 SEIS_CARACTERES=6
 VINTE_CARACTERES=20
-if not utils.validarTamanhoSenha(senhaInformadaPeloUsuario, SEIS_CARACTERES, VINTE_CARACTERES):
+if not utils.validarTamanhoSenha(senhaInformadaPeloUsuario):
     print(f"A senha deve ter no mínimo {SEIS_CARACTERES} caracteres e no mximo {VINTE_CARACTERES}")
 
 elif not utils.validarCaracteresMinusculos(senhaInformadaPeloUsuario):
