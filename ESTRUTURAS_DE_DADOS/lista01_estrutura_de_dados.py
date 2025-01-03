@@ -110,14 +110,52 @@ print(medicos_escolhidos)
 
 """8. Crie um dicionário, baseado nas informações usadas para criar a lista de compras da questão 4, 
 de forma que seja possível definir o preço de cada produto. """
+lista_de_compras={
+    "arroz": 8.0,
+    "feijão": 8.5,
+    "macarrão": 5.0,
+    "açúcar": 5.0,
+    "sal": 7.0,
+    "óleo": 12.0,
+    "leite": 8.0,
+    "ovos": 25.0,
+    "frutas": 5.0,
+    "legumes": 6.0,
+    "carne": 50.0,
+    "pão": 12.0,
+    "queijo":9.0,
+    "café": 8.9,
+    "biscoitos":8.0}
 
 """9. Baseado no dicionário criado na questão 8, crie um programa que solicite ao usuário que 
 informe o nome de um produto. Se o produto informado pelo usuário estiver na lista de compras do tipo 
 dicionário, exiba a mensagem na tela: "O item {nome do produto} faz parte da lista de compras do supermercado".
  Senão, exiba a mensagem: "O item {nome do produto} NÃO faz parte da lista de compras do supermercado"."""
+print("Questão 9: Encontrar produto na lista de compra")
+Prod_digitado_pelo_usuario= input("Informe o nome do produto dentro de sua lista de compras:  ")
+ITEM_DICIONARIO_COMPRAS= utils.item_esta_no_dicionario(lista_de_compras, Prod_digitado_pelo_usuario)
+print(ITEM_DICIONARIO_COMPRAS)
 
 """10. Crie um dicionário que armazene um cadastro para uma loja. Esse cadastro deve conter informações como: 
 nome, idade, sexo, estado civil, nacionalidade, faixa de renda, etc... Exiba na tela tais informações."""
+print("Questão 10: Cadastro da loja")
+cadastro_loja={
+    "NOME":  "Kauã",
+    "IDADE": 16,
+    "SEXO": "Masculino",
+    "ESTADO_CIVIL": "Abandonado",
+    "NACIONALIDADE": "Brasileiro",
+    "FAIXA_DE_RENDA": "1 milhão"  #As vezes temos que ser verdadeiros kk
+}
+for cadastro, dados_cadastrado in cadastro_loja.items():
+    print(f"\n{cadastro}= {dados_cadastrado} ")
 
 """11. Crie um programa que receba dados de um aluno como: nome e notas. Cadastre 03 trimestres de informações. 
-Retorne uma nova estrutura de dados que armazene o nome e a média do aluno. Imprima, na tela, as informações dessa nova estrutura de dados."""
+Retorne uma nova estrutura de dados que armazene o nome e a média do aluno. 
+Imprima, na tela, as informações dessa nova estrutura de dados."""
+estudante={
+    "nome": "Fulano",
+    "Notas": [8, 7.5, 9] # media final de 3 trimestres
+}
+media_notas= sum(estudante["Notas"]) / len(estudante["Notas"])
+print(f" O aluno {estudante['nome']} tem a media final de:{media_notas:.2f}")

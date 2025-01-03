@@ -106,6 +106,17 @@ def marcar_consulta():
     if marcar_consulta_com_dr in medicos:
         return(f"A consulta foi marcada com exito com {marcar_consulta_com_dr}!")
     else: return(f"Não foi possivel marcar consulta com {marcar_consulta_com_dr}. O nome pode ter sido digitado incorretamente ou não está na lista.")
+
+"""9. Baseado no dicionário criado na questão 8, crie um programa que solicite ao usuário que 
+informe o nome de um produto. Se o produto informado pelo usuário estiver na lista de compras do tipo 
+dicionário, exiba a mensagem na tela: "O item {nome do produto} faz parte da lista de compras do supermercado".
+ Senão, exiba a mensagem: "O item {nome do produto} NÃO faz parte da lista de compras do supermercado"."""
+def item_esta_no_dicionario(lista_de_compras, Prod_digitado_pelo_usuario):
+    lista_de_compras.get("Prod_Prod_digitado_pelo_usuario")
+    if Prod_digitado_pelo_usuario is None:
+        return (f"O item {Prod_digitado_pelo_usuario} NÃO faz parte da lista de compras do supermercado")
+    else: return (f"O item {Prod_digitado_pelo_usuario} faz parte da lista de compras do supermercado")
+    #if Prod_digitado_pelo_usuario in lista_de_compras:
     
     
 #####################################################FUNCOES_STRING#####################################################
