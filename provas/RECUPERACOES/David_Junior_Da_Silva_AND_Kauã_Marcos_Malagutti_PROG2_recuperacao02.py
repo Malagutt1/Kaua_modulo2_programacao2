@@ -5,7 +5,7 @@ init()  # Inicializa a biblioteca Colorama para uso.
 lista_dos_eventos = []  # Lista para armazenar os nomes dos eventos.
 quantidade_de_pessoas = []  # Lista para armazenar o número máximo de vagas de cada evento.
 alunos_por_evento = {}  # Dicionário que relaciona eventos aos alunos inscritos.
-aluno = []  # Lista para armazenar os nomes dos alunos cadastrados.
+alunos_por_evento["aluno"]=[] # Inicia a lista de alunos como vazia
 
 # Função para cadastrar um evento com título e número máximo de participantes.
 def cadastrar_eventos(titulo_do_evento, quantidade_maxima_de_pessoas):
@@ -15,26 +15,37 @@ def cadastrar_eventos(titulo_do_evento, quantidade_maxima_de_pessoas):
     print(Fore.GREEN + f"O evento '{titulo_do_evento}' foi adicionado!" + Fore.RESET)  # Mensagem de confirmação.
     print(Fore.GREEN + f"Seu evento tem a quantidade máxima de {quantidade_maxima_de_pessoas} pessoas." + Fore.RESET)  # Confirma o número máximo de vagas.
 
+def remover_eventos(titulo_do_evento):
+    lista_dos_eventos.remove(titulo_do_evento) # remove o evento da lista de eventos
+    alunos_por_evento.pop(titulo_do_evento, None)  # Remove os alunos relacionados ao evento
+    print(Fore.GREEN + f" O evento {titulo_do_evento} foi removido com sucesso"+ Fore.RESET)
+ 
 # Função para cadastrar um aluno pelo nome.
 def cadastrar_alunos(nome_aluno):
+    alunos_por_evento["aluno"].append(nome_aluno)# Adiciona o nome do aluno à lista de alunos.
     print(Fore.GREEN + f"O(a) aluno(a) {nome_aluno} foi registrado no sistema!" + Fore.RESET)  # Mensagem de confirmação.
-    aluno.append(nome_aluno)  # Adiciona o nome do aluno à lista de alunos.
     return nome_aluno  # Retorna o nome do aluno.
 
-def excluir_alunos(nome_aluno,evento): 
-    aluno_removido= False
+def excluir_alunos(nome_aluno): 
+    aluno_removido = False
     for evento, alunos in alunos_por_evento.items():
-        if nome_aluno in alunos:  # Verifica se o aluno está inscrito no evento.
-            alunos.remove(nome_aluno)  # Remove o aluno da lista de inscritos.
+        if evento != "aluno" and nome_aluno in alunos:  # Ignora a chave 'aluno' e verifica se o aluno está inscrito no evento.
+            alunos_por_evento[evento].remove(nome_aluno)  # Remove o aluno da lista de inscritos no evento.
             indice_evento = lista_dos_eventos.index(evento)  # Obtém o índice do evento na lista.
             quantidade_de_pessoas[indice_evento] += 1  # Incrementa o número de vagas disponíveis.
             aluno_removido = True  # Marca que o aluno foi removido.
-    if nome_aluno in alunos:
-        alunos.remove(nome_aluno)
-    print(Fore.GREEN + f"O(a) aluno(a) {nome_aluno} foi removido(a) de todos os eventos!" + Fore.RESET)
-        
-    return aluno_removido  # Retorna o nome do aluno.
+
+    # Verifica se o aluno está na lista geral de alunos (fora dos eventos)
+    if nome_aluno in alunos_por_evento["aluno"]:
+        alunos_por_evento["aluno"].remove(nome_aluno)  # Remove o aluno da lista geral.
+        aluno_removido = True  # Marca que o aluno foi removido da lista geral.
     
+    if aluno_removido:
+        print(Fore.GREEN + f"O(a) aluno(a) {nome_aluno} foi removido(a) de todos os eventos e da lista geral!" + Fore.RESET)
+    else:
+        print(Fore.RED + f"O(a) aluno(a) {nome_aluno} não foi encontrado(a) nos eventos nem na lista geral de alunos." + Fore.RESET)
+
+    return aluno_removido  # Retorna se o aluno foi removido ou não.
 
 # Função para exibir todos os eventos e suas vagas disponíveis.
 def exibir_eventos():
@@ -60,60 +71,86 @@ def fazer_inscricao(aluno, evento):
 
 # Função para exibir os alunos inscritos em cada evento.
 def exibir_alunos_no_evento():
-    print(Fore.LIGHTYELLOW_EX + "Alunos por evento:" + Fore.RESET)  # Cabeçalho da lista de alunos por evento.
-    for evento, alunos in alunos_por_evento.items():  # Itera pelos eventos e suas listas de alunos.
-        print(f"- {evento}: {', '.join(alunos) if alunos else 'Nenhum aluno inscrito.'}")  # Exibe os alunos inscritos ou indica que nenhum foi inscrito.
+    print(Fore.LIGHTYELLOW_EX + "Alunos por evento:" + Fore.RESET) 
+    # Exibe os alunos inscritos por evento
+    for evento in lista_dos_eventos:
+        alunos = alunos_por_evento.get(evento, [])
+        print(f"- {evento}: {', '.join(alunos) if alunos else 'Nenhum aluno inscrito.'}")
+        
+def exibir_alunos_cadastrados():
+    print(Fore.LIGHTYELLOW_EX + "Lista de Alunos Cadastrados:" + Fore.RESET)  # Cabeçalho da lista.
+    if alunos_por_evento["aluno"]:  # Verifica se há alunos cadastrados.
+        for nome in alunos_por_evento["aluno"]:
+            print(f"- {nome}")  # Exibe o nome de cada aluno.
+    else:
+        print(Fore.RED + "Nenhum aluno cadastrado no sistema." + Fore.RESET)
 
 # Função principal para exibir o menu de opções e executar ações escolhidas pelo usuário.
 def menu_opcoes():
     while True:  # Loop principal para manter o menu ativo.
         Menu_opcoes_escolher = input("\nDigite um número para as seguintes funções:\n"
                                     "1 = Cadastrar novo evento\n"
-                                    "2 = Cadastrar aluno\n"
-                                    "3 = Remover aluno\n"
-                                    "4 = Exibir eventos na tela\n"
-                                    "5 = Fazer inscrição do aluno em um evento\n"
-                                    "6 = Exibir alunos no evento\n"
+                                    "2 = Remover evento\n"
+                                    "3 = Cadastrar aluno\n"
+                                    "4 = Remover aluno\n"
+                                    "5 = Exibir eventos na tela\n"
+                                    "6 = Fazer inscrição do aluno em um evento\n"
+                                    "7 = Exibir alunos no evento\n"
+                                    "8 = Exibir todos os alunos cadastrados\n"
                                     "Digite 'sair' para sair do menu\n"
                                     "Escolha a opção desejada: ").strip().lower()  # Solicita a escolha do usuário.
 
         if Menu_opcoes_escolher == "1":  # Opção para cadastrar um novo evento.
             titulo_do_evento = input("Insira o nome para o novo evento: ").strip()  # Solicita o nome do evento.
-            while True:  # Valida o número máximo de pessoas.
-                quantidade_maxima_de_pessoas = input("Insira a quantidade máxima de pessoas para seu novo evento: ").strip()
-                if not quantidade_maxima_de_pessoas.isnumeric():  # Verifica se o valor é numérico.
-                    print(Fore.RED + "Favor inserir um número válido!" + Fore.RESET)  # Mensagem de erro para entrada inválida.
-                else:
-                    quantidade_maxima_de_pessoas = int(quantidade_maxima_de_pessoas)  # Converte para inteiro.
-                    cadastrar_eventos(titulo_do_evento, quantidade_maxima_de_pessoas)  # Chama a função para cadastrar o evento.
-                    break
+            if titulo_do_evento in lista_dos_eventos:  # Verifica se o evento já existe.
+                print(Fore.RED + f"Erro: O evento '{titulo_do_evento}' já foi cadastrado!" + Fore.RESET)  # Mensagem de erro.
+            else:
+                while True:  # Valida o número máximo de pessoas.
+                    quantidade_maxima_de_pessoas = input("Insira a quantidade máxima de pessoas para seu novo evento: ").strip()
+                    if not quantidade_maxima_de_pessoas.isnumeric():  # Verifica se o valor é numérico.
+                        print(Fore.RED + "Favor inserir um número válido!" + Fore.RESET)  # Mensagem de erro para entrada inválida.
+                    else:
+                        quantidade_maxima_de_pessoas = int(quantidade_maxima_de_pessoas)  # Converte para inteiro.
+                        cadastrar_eventos(titulo_do_evento, quantidade_maxima_de_pessoas)  # Chama a função para cadastrar o evento.
+                        break
+        elif Menu_opcoes_escolher == "2":
+            titulo_do_evento = input("Insira o nome do evento para ser removido: ").strip()  # Solicita o nome do evento.
+            if titulo_do_evento in lista_dos_eventos :
+                remover_eventos(titulo_do_evento)
+            else: print(Fore.RED + "Evento não encontrado no sistema!" + Fore.RESET)
 
-        elif Menu_opcoes_escolher == "2":  # Opção para cadastrar um aluno.
+        elif Menu_opcoes_escolher == "3":  # Opção para cadastrar um aluno.
             nome_aluno = input("Insira o nome do estudante: ").strip()  # Solicita o nome do aluno.
-            cadastrar_alunos(nome_aluno)  # Chama a função para registrar o aluno.
+            if nome_aluno in alunos_por_evento["aluno"]:
+                print(Fore.RED + f"O aluno '{nome_aluno}' já está cadastrado!" + Fore.RESET)
+            else: cadastrar_alunos(nome_aluno)  # Chama a função para registrar o aluno.
             
-        elif Menu_opcoes_escolher == "3":
+        elif Menu_opcoes_escolher == "4":
             nome_aluno = input("Insira o nome do estudante a ser removido: ").strip()  # Solicita o nome do aluno.
-            if nome_aluno in aluno:
-                excluir_alunos(nome_aluno, evento)  # Chama a função para excluir o aluno.
+            if nome_aluno in alunos_por_evento["aluno"]:
+                excluir_alunos(nome_aluno)  # Chama a função para excluir o aluno.
             else:
                 print(Fore.RED + "Aluno não encontrado no sistema!" + Fore.RESET)
 
-        elif Menu_opcoes_escolher == "4":  # Opção para exibir os eventos disponíveis.
+        elif Menu_opcoes_escolher == "5":  # Opção para exibir os eventos disponíveis.
             exibir_eventos()  # Chama a função para exibir os eventos.
 
-        elif Menu_opcoes_escolher == "5":  # Opção para inscrever um aluno em um evento.
+        elif Menu_opcoes_escolher == "6":  # Opção para inscrever um aluno em um evento.
             nome_aluno = input("Insira o nome do aluno para inscrição: ").strip()  # Solicita o nome do aluno.
-            if nome_aluno in aluno:  # Verifica se o aluno foi registrado previamente.
-                nome_aluno = str(nome_aluno)  # Converte para string (não necessário aqui, mas incluído).
+            if nome_aluno in alunos_por_evento["aluno"]:  # Verifica se o aluno foi registrado previamente.
                 evento = input("Insira o nome do evento: ").strip()  # Solicita o nome do evento.
                 fazer_inscricao(nome_aluno, evento)  # Chama a função para fazer a inscrição.
             else:
-                print("Aluno não adicionado ao banco de dados")  # Mensagem de erro para aluno não registrado.
+                print(Fore.RED + "O aluno deve ser cadastrado antes de se inscrever em um evento." + Fore.RESET)  # Mensagem de erro para aluno não registrado.
             
+        elif Menu_opcoes_escolher == "7":  # Opção para exibir os alunos inscritos em eventos.
+            if not lista_dos_eventos:  # Verifica se há eventos cadastrados antes de tentar mostrar os alunos.
+                print(Fore.RED + "Nenhum evento cadastrado. Retornando ao menu..." + Fore.RESET)  # Mensagem caso não haja eventos.
+                continue
+            else:  exibir_alunos_no_evento()  # Chama a função para exibir alunos por evento.
 
-        elif Menu_opcoes_escolher == "6":  # Opção para exibir os alunos inscritos em eventos.
-             exibir_alunos_no_evento()  # Chama a função para exibir alunos por evento.
+        elif Menu_opcoes_escolher == "8":  # Nova opção para exibir alunos cadastrados.
+            exibir_alunos_cadastrados()  # Chama a função para exibir os alunos.
 
         elif Menu_opcoes_escolher == "sair":  # Opção para sair do menu.
             deseja_sair = input("Tem certeza que deseja sair? Digite 'sair' novamente para confirmar: ").strip().lower()  # Confirmação adicional para sair.
