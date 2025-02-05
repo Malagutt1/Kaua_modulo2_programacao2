@@ -47,11 +47,15 @@ def cadastrar_evento_arquivo():
         else: 
             # o arquivo não exite e sera aberto no m odo WRITE, um arquivo em branco é criado
             fEvento= open(arquivo_eventos, "w")
+            
             nome_colunas= "nome do evento, capacidadem vagas restantes\n"
+            fEvento.write(nome_colunas)
+            
             linha = [titulo, "," ,
                      capacidade, ",",
                      capacidade, "\n"]
-            informacoes = "".join(linha)  # grava no arquivo .txt
+            
+            informacoes = " ".join(linha)  # grava no arquivo .txt
             fEvento.write(f"{informacoes}")
             fEvento.close() # obrigatorio!!!  fecha o arquivo apos as operações finalizadas
             
@@ -63,10 +67,11 @@ def exibir_eventos_arquivos():
         fEvento = open(arquivo_eventos, "r")
         for arquivo_eventos in fEvento:
             registro_eventos = arquivo_eventos.split(",")
+            print(registro_eventos)
             fEvento.close()
         
     except Exception as error_arquivos:
-        print ("")
+        print (f"ERROR: ao ler o arquivo: {error_arquivos}")
         
 
 
@@ -177,7 +182,8 @@ def executar_menu():
             inscrever_aluno_curso()
         
         elif opcaoDigitada == "4":
-            exibir_eventos_cadastrados()
+            #exibir_eventos_cadastrados()
+            exibir_eventos_arquivos()
         
         elif opcaoDigitada == "5":
             exibir_alunos_cadastrados()

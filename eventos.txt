@@ -1,0 +1,2 @@
+nome do evento, capacidadem vagas restantes
+E,12,12
