@@ -1,3 +1,8 @@
+import os                               # pacote Pandas
+arquivo_eventos     = "eventos.txt"     # armazena informações sobre os eventos
+arquivos_alunos     = "alunos.txt"      # armazena informações sobre os alunos
+arquivo_inscricoes  = "inscricoes.txt"  # armazena informações sobre os alunos
+
 SOMAR               = "SOMAR"
 SUBTRAIR            = "SUBTRAIR"
 
@@ -19,6 +24,51 @@ inscricao = {} #keys: evento_nome, aluno_nome
 eventos_cadastrados    = [] #manipula evento
 alunos_cadastrados     = [] #manipula aluno
 inscricoes_cadastradas = [] #manipula inscrição de alunos em eventos já cadastrados
+
+def arquivo_existente(nome_arquivo):
+    # o parametro "nome_arquivo" deve conter o caminho absoluto ou relativo do arquivo, seu nome e extensão
+    try:
+        if (os.path.exists(nome_arquivo)):
+            return True
+        else: 
+            return False
+    except Exception as error_arquivos:
+        print(f"ERROR: {error_arquivos}")
+        return False
+
+def cadastrar_evento_arquivo():
+    titulo          = input('\nDIGITE O NOME DO EVENTO: ').title().strip()
+    capacidade      = input('DIGITE A CAPACIDADE MÁXIMA DO EVENTO: ').strip()
+    try:
+        diretorio_atual_pasta = "" + os.getcwd() + "/" + arquivo_eventos + ""
+        if arquivo_existente(diretorio_atual_pasta):
+            # se o arquivo existem abre no modo append, adicionar conteudo ao final do arquivo
+            fEvento= open(arquivo_eventos, "a")
+        else: 
+            # o arquivo não exite e sera aberto no m odo WRITE, um arquivo em branco é criado
+            fEvento= open(arquivo_eventos, "w")
+            nome_colunas= "nome do evento, capacidadem vagas restantes\n"
+            linha = [titulo, "," ,
+                     capacidade, ",",
+                     capacidade, "\n"]
+            informacoes = "".join(linha)  # grava no arquivo .txt
+            fEvento.write(f"{informacoes}")
+            fEvento.close() # obrigatorio!!!  fecha o arquivo apos as operações finalizadas
+            
+    except Exception as error_arquivos:
+        print(f"Error: {error_arquivos}")
+        
+def exibir_eventos_arquivos():
+    try:
+        fEvento = open(arquivo_eventos, "r")
+        for arquivo_eventos in fEvento:
+            registro_eventos = arquivo_eventos.split(",")
+            fEvento.close()
+        
+    except Exception as error_arquivos:
+        print ("")
+        
+
 
 
 def exibir_menu():
@@ -117,7 +167,8 @@ def executar_menu():
         opcaoDigitada = input("DIGITE UMA OPÇÃO VÁLIDA DO MENU: ")
     
         if opcaoDigitada == "1":
-            cadastrar_evento()
+            #cadastrar_evento()
+            cadastrar_evento_arquivo()
         
         elif opcaoDigitada == "2":
             cadastrar_aluno()
