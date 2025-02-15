@@ -1,201 +1,428 @@
-import os                               # pacote Pandas
-arquivo_eventos     = "eventos.txt"     # armazena informações sobre os eventos
-arquivos_alunos     = "alunos.txt"      # armazena informações sobre os alunos
-arquivo_inscricoes  = "inscricoes.txt"  # armazena informações sobre os alunos
+#Kauã
+import os
+from time import sleep              #importação da função sleep da biblioteca time
 
-SOMAR               = "SOMAR"
-SUBTRAIR            = "SUBTRAIR"
+#arquivo evento.txt     - armazenar informções sobre os eventos
+#arquivo aluno.txt      - armazenar informções sobre os alunos
+#arquivo inscrições.txt - armazenar informções sobre os alunos matriculados
+arquivo_eventos     = "Kaua_modulo2_programacao2/tratamento_de_arquivos/evento.txt"
+arquivo_aluno       = "Kaua_modulo2_programacao2/tratamento_de_arquivos/aluno.txt"
+arquivo_matriculados = "Kaua_modulo2_programacao2/tratamento_de_arquivos/inscrições.txt"
 
-menu = """\nMenu de Opções:
+somar    = "SOMAR"
+subtrair = "SUBTRAIR"
+
+menu = '''\nMenu de Opções:
             1- Cadastrar evento
-            2- Cadastrar aluno
-            3- Inscrever aluno
-            4- Listar eventos cadastrados
-            5- Listar alunos cadastrados
-            6- Resumo participação
-            7 - Sair\n"""""
+            2- Excluir evento
+            3- Cadastrar aluno
+            4- excluir aluno
+            5- Matricular aluno
+            6- Desmatricular aluno
+            7- Ver eventos cadastrados
+            8- Ver alunos cadastrados
+            9- Ver alunos matriculados
+            10- Resumo SNCT
+            
+            Sair - digite SAIR\n'''
 
-#Dicionários
 evento    = {} #keys: titulo, capacidade, vagas_restantes
 aluno     = {} #keys: nome, curso, instituição
-inscricao = {} #keys: evento_nome, aluno_nome
+matricula = {} #keys: evento_nome, evento_aluno
 
-#Listas de dicionários
-eventos_cadastrados    = [] #manipula evento
-alunos_cadastrados     = [] #manipula aluno
-inscricoes_cadastradas = [] #manipula inscrição de alunos em eventos já cadastrados
+eventos_cadastrados = [] #manipula evento
+alunos_cadastrados  = [] #manipula aluno
+alunos_matriculados = [] #manipula inscrição de alunos em eventos já pré cadastrados
 
-def arquivo_existente(nome_arquivo):
-    # o parametro "nome_arquivo" deve conter o caminho absoluto ou relativo do arquivo, seu nome e extensão
+def arquivoExiste(nomeArquivo):
     try:
-        if (os.path.exists(nome_arquivo)):
+        #O parâmetro "nomeArquivo" deverá conter o caminho "absoluto ou relativo"
+        #do arquivo, seu nome e sua extensão
+        if(os.path.exists(nomeArquivo)):
             return True
-        else: 
+        else:
             return False
-    except Exception as error_arquivos:
-        print(f"ERROR: {error_arquivos}")
+    except Exception as erroArquivo:
+        print(f"Erro: {erroArquivo}")
         return False
 
 def cadastrar_evento_arquivo():
-    titulo          = input('\nDIGITE O NOME DO EVENTO: ').title().strip()
-    capacidade      = input('DIGITE A CAPACIDADE MÁXIMA DO EVENTO: ').strip()
+    titulo      = input("\nDIGITE O NOME DO EVENTO: ").strip()
+    capacidade  = input("DIGITE A CAPACIDADE MÁXIMA DO EVENTO: ").strip()
+    
     try:
-        diretorio_atual_pasta = "" + os.getcwd() + "/" + arquivo_eventos + ""
-        if arquivo_existente(diretorio_atual_pasta):
-            # se o arquivo existem abre no modo append, adicionar conteudo ao final do arquivo
-            fEvento= open(arquivo_eventos, "a")
-        else: 
-            # o arquivo não exite e sera aberto no m odo WRITE, um arquivo em branco é criado
-            fEvento= open(arquivo_eventos, "w")
-            
-            nome_colunas= "nome do evento, capacidadem vagas restantes\n"
-            fEvento.write(nome_colunas)
-            
-            linha = [titulo, "," ,
-                     capacidade, ",",
-                     capacidade, "\n"]
-            
-            informacoes = " ".join(linha)  # grava no arquivo .txt
-            fEvento.write(f"{informacoes}")
-            fEvento.close() # obrigatorio!!!  fecha o arquivo apos as operações finalizadas
-            
-    except Exception as error_arquivos:
-        print(f"Error: {error_arquivos}")
+        #Pega o diretório atual e concatena o nome do arquivo a ser criado\aberto
+        #se houver espaços em branco no caminho absoluto, este deve ser passado 
+        #como string (entre aspas)
+        diretorioAtualPasta = "" + os.getcwd() + "/" + arquivo_eventos + ""
         
-def exibir_eventos_arquivos():
+        if arquivoExiste(diretorioAtualPasta):
+            #se o arquivo EXISTE, abre no modo APPEND, ou seja, um arquivo em branco, sem conteúdo
+            #ao final do arquivo.
+            fEvento = open(arquivo_eventos, 'a')
+        else:
+            #O arquivp NÃO EXISTE, e será aberto no modo WRITE, ou seja, um arquivo
+            #em branco, sem conteúdo.
+            fEvento = open(arquivo_eventos, 'w')
+            #escreve na primeira linha o nome das colunas que identifica as informações
+            nomeColunas = 'Nome do Evento | Capacidade | Vagas restantes\n'
+            fEvento.write(nomeColunas)
+        
+            
+        #o conteúdo do arquivo será gravado como uma string
+        linha = [titulo
+        , "|"
+        , capacidade
+        , "|"
+        , capacidade #parametro que representa as vagas restantes
+        ,"|\n"]
+        #grava as informações do evento no arquivo.txt
+        informacoes = "".join(linha)    
+        #Evento.write(repr(informacoes))
+        fEvento.write((f'{informacoes}'))
+        
+        #OBRIGATORIAMENTE, depois de finalizados as operações de gravação, o
+        #arquivo deve ser FECHADO
+        fEvento.close()
+              
+    except Exception as erroArquivo:
+        print(f"Erro: {erroArquivo}")
+    
+def exibir_evento_arquivo():
+    
     try:
         fEvento = open(arquivo_eventos, "r")
-        for arquivo_eventos in fEvento:
-            registro_eventos = arquivo_eventos.split(",")
-            print(registro_eventos)
-            fEvento.close()
         
-    except Exception as error_arquivos:
-        print (f"ERROR: ao ler o arquivo: {error_arquivos}")
-        
+        for eventoArquivo in fEvento:
+            registroEvento = eventoArquivo.split(",")
+            print(registroEvento)
+        fEvento.close()
+    except Exception as erro:
+        print(f"Erro: {erro}")
 
-
-
-def exibir_menu():
-    print(menu)
-
-def exibir_eventos_cadastrados():
-    for evento in eventos_cadastrados:
-        print(evento)
-        
-def exibir_alunos_cadastrados():
-    for aluno in alunos_cadastrados:
-        print(aluno)
-        
-def exibir_inscricoes_efetuadas():
-    for inscricao in inscricoes_cadastradas:
-        print(inscricao)        
-
-#Fazer validação dos dados e tratamento de erro
-def cadastrar_evento():
-    titulo          = input('\nDIGITE O NOME DO EVENTO: ').title().strip()
-    if not titulo in eventos_cadastrados:
-        capacidade      = input('DIGITE A CAPACIDADE MÁXIMA DO EVENTO: ').strip()
-        if capacidade.isnumeric():
-            capacidade = int(capacidade)
-            evento = {'titulo_evento': titulo,#Cria um evento novo que é armazenado em uma variável do tipo "dicionário"
-                    'capacidade': capacidade,
-                    'vagas_restantes': capacidade}  
-        eventos_cadastrados.append(evento) #Armazena, na lista de dicionários, o evento novo criado
-        
-    elif titulo in eventos_cadastrados:
-        print("Esse titulo já foi cadastrado anteriormente")   
-
+def excluir_evento_arquivo(nomeDoEvento):
+    registroArquivo = []
     
-#Fazer validação dos dados e tratamento de erro
-def cadastrar_aluno():
-    nome        = input('\nDIGITE O NOME DO ALUNO: ').strip()
-    curso       = input('DIGITE O CURSO DO ALUNO: ').strip()
-    instituicao = input('DIGITE A INSTITUIÇÃO EM QUE O ALUNO ESTUDA: ').strip()
-
-    #Cria um aluno novo que é armazenado em uma variável do tipo "dicionário"
-    aluno = {'nome_aluno': nome,
-                 'curso' : curso,
-            'instituicao': instituicao
-            }      
-
-    #Armazena, na lista de dicionários, o aluno novo criado
-    alunos_cadastrados.append(aluno)    
-    
-#Fazer validação dos dados e tratamento de erro
-def inscrever_aluno_curso():
-    nomeEvento  = input('\nDIGITE O NOME DO EVENTO EM QUE O ALUNO QUER SE INSCREVER: ').strip()
-    nomeAluno   = input('DIGITE O NOME DO ALUNO: ').strip()
-
-    #Cria uma inscrição nova que é armazenada em uma variável do tipo "dicionário"
-    inscricao = {'evento_nome': nomeEvento,
-                 'aluno_nome' : nomeAluno
-                }
-    
-    #Armazena, na lista de dicionários, a inscrição nova criada
-    #PRECISA validar se o aluno informado já não está inscrito nesse curso
-    #PRECISA validar se o curso existe e se o aluno existe
-    inscricoes_cadastradas.append(inscricao)
-    
-    #Atualizar o número de vagas restantes no curso em que o aluno foi inscrito
-    atualizar_vagas(nomeEvento, SUBTRAIR)
-
-
-#Fazer validação dos dados e tratamento de erro
-def atualizar_vagas(nomeEvento, tipoAtualizacao):
-    msg = ''
-
-    if len(eventos_cadastrados) > 0:
-        for indice in range(len(eventos_cadastrados)):
-            if eventos_cadastrados[indice].get('titulo_evento').upper() == nomeEvento.upper():
-                if tipoAtualizacao == SOMAR:
-                    atualizar = int(eventos_cadastrados[indice].get('vagas_restantes')) + 1
-                else:
-                    atualizar = int(eventos_cadastrados[indice].get('vagas_restantes')) - 1
-                
-                #validar o numero máximo de vagas definida na criação do evento novo
-                if atualizar >= 0:
-                    eventos_cadastrados[indice].update({'vagas_restantes': atualizar})
-                    msg = 'O evento ' + eventos_cadastrados[indice].get('titulo_evento') + ' foi atualizado com sucesso!'
-                else:
-                    msg = 'Não há mais vagas disponíveis neste curso'
-    else:
-        msg = 'Não existem eventos cadastrados.'
-
-    return msg
-
-def executar_menu():
-    while True:
-        exibir_menu()
+    try:
+        diretorioAtualPasta = "" + os.getcwd() + "/" + arquivo_eventos + ""
         
-        #Fazer validação dos dados e tratamento de erro
-        opcaoDigitada = input("DIGITE UMA OPÇÃO VÁLIDA DO MENU: ")
-    
-        if opcaoDigitada == "1":
-            #cadastrar_evento()
-            cadastrar_evento_arquivo()
-        
-        elif opcaoDigitada == "2":
-            cadastrar_aluno()
-        
-        elif opcaoDigitada == "3":
-            inscrever_aluno_curso()
-        
-        elif opcaoDigitada == "4":
-            #exibir_eventos_cadastrados()
-            exibir_eventos_arquivos()
-        
-        elif opcaoDigitada == "5":
-            exibir_alunos_cadastrados()
-        
-        elif opcaoDigitada == "6":
-            exibir_inscricoes_efetuadas()
-        
-        elif opcaoDigitada == "7":
-            break
-                
+        if arquivoExiste(diretorioAtualPasta):
+            #O Arquivo obrigatoriamente deverá ser aberto no modo LEITURA
+            with open(diretorioAtualPasta, "r") as arquivoDeEvento:
+                registroArquivo = arquivoDeEvento.readlines()
+                   
+            if (len(registroArquivo) > 0):
+                for indiceLinha in range(len(registroArquivo)):
+                    linha = registroArquivo[indiceLinha]
+                    
+                    if linha.find(nomeDoEvento) >= 0:
+                        #Encontrou o evento e excluiu da lista
+                        registroArquivo.pop(indiceLinha)
+                        
+            #trunca o arquivo e copia a lista pra dentro dele      
+            if (len(registroArquivo) > 0):
+                with open(diretorioAtualPasta, "w") as arquivoDeEventosAlterado:
+                    arquivoDeEventosAlterado.writelines(registroArquivo)
+            
+            return "Evento exclu[ido com sucesso"    
         else:
-            print(f"{opcaoDigitada} - OPÇÃO INVÁLIDA DE MENU.")
+            print("Erro! Não há arquivos.")
+        
+    except Exception as erroArquivo:
+        print(f'Erro na manipulação do Arquivo {erroArquivo}')
+    
+def exibir_aluno_arquivo():
+    try:
+        fALuno = open(arquivo_aluno, "r")
+        
+        for eventoArquivo in fALuno:
+            registroEvento = eventoArquivo.split(",")
+            print(registroEvento)
+        fALuno.close()
+    except Exception as erro:
+        print(f"Erro: {erro}")     
 
+def cadastrar_aluno_arquivo():
+    aluno  = input("\nDIGITE O NOME DO ALUNO: ").strip()
+    modulo = input("\nDIGITE SEU MÓDULO: ").strip()
+    curso  = input('\nDIGITE SEU CURSO: ').strip()
+    
+    try:
+        #Pega o diretório atual e concatena o nome do arquivo a ser criado\aberto
+        #se houver espaços em branco no caminho absoluto, este deve ser passado 
+        #como string (entre aspas)
+        diretorioAtualPasta = "" + os.getcwd() + "/" + arquivo_aluno + ""
+        
+        if arquivoExiste(diretorioAtualPasta):
+            #se o arquivo EXISTE, abre no modo APPEND, ou seja, um arquivo em branco, sem conteúdo
+            #ao final do arquivo.
+            fAluno = open(arquivo_aluno, 'a')
+        else:
+            #O arquivo NÃO EXISTE, e será aberto no modo WRITE, ou seja, um arquivo
+            #em branco, sem conteúdo.
+            fAluno = open(arquivo_aluno, 'w')
+            #escreve na primeira linha o nome das colunas que identifica as informações
+            nomeColunas = 'Nome do Aluno | Modulo | Curso\n'
+            fAluno.write(nomeColunas)
+            
+        #o conteúdo do arquivo será gravado como uma string
+        linha = [aluno
+        , "|"
+        , modulo
+        , "|"
+        , curso
+        ,"\n"]
+        #grava as informações do evento no arquivo.txt
+        informacoes = "".join(linha)
+        #Evento.write(repr(informacoes))
+        fAluno.write((f'{informacoes}'))
+        
+        #OBRIGATORIAMENTE, depois de finalizados as operações de gravação, o
+        #arquivo deve ser FECHADO
+        fAluno.close()
+              
+    except Exception as erroArquivo:
+        print(f"Erro: {erroArquivo}")
 
-executar_menu()
+def excluir_aluno_arquivo(nomeAluno):
+    registroArquivo = []
+    
+    try:
+        diretorioAtualPasta = "" + os.getcwd() + "/" + arquivo_aluno + ""
+        
+        if arquivoExiste(diretorioAtualPasta):
+            #O Arquivo obrigatoriamente deverá ser aberto no modo LEITURA
+            with open(diretorioAtualPasta, "r") as arquivoDeAluno:
+                registroArquivo = arquivoDeAluno.readlines()
+                   
+            if (len(registroArquivo) > 0):
+                for indiceLinha in range(len(registroArquivo)):
+                    linha = registroArquivo[indiceLinha]
+                    
+                    if linha.find(nomeAluno) >= 0:
+                        #Encontrou o aluno e excluiu da lista
+                        registroArquivo.pop(indiceLinha)
+                        
+            #trunca o arquivo e copia a lista pra dentro dele      
+            if (len(registroArquivo) > 0):
+                with open(diretorioAtualPasta, "w") as arquivoDeAlunosAlterado:
+                    arquivoDeAlunosAlterado.writelines(registroArquivo)
+            
+            return "Aluno excluido com sucesso"    
+        else:
+            print("Erro! Não há arquivos.")
+        
+    except Exception as erroArquivo:
+        print(f'Erro na manipulação do Arquivo {erroArquivo}')
+        
+def codigo_principal(): #ok
+    escolhaDoMenu = ''
+    while escolhaDoMenu != 'sair':
+        print(exibir_menu(menu))
+        escolhaDoMenu = str(input('Digite sua escolha: ')).strip().lower()
+        if escolhaDoMenu == 'sair':
+            break
+        else:
+            print(escolha_do_menu(escolhaDoMenu))
+    print('Saiu. Obrigado!')
+    resumo()    
+
+def exibir_matriculado_arquivo():
+    try:
+        fMatriculado = open(arquivo_aluno, "r")
+        
+        for eventoArquivo in fMatriculado:
+            registroEvento = eventoArquivo.split(",")
+            print(registroEvento)
+        fMatriculado.close()
+    except Exception as erro:
+        print(f"Erro: {erro}") 
+
+def matricular_aluno_arquivo():
+    exibir_aluno_arquivo()
+    aluno  = input("\ESCOLHA O NOME DO ALUNO: ").strip()
+    exibir_evento_arquivo()
+    evento = input("\nESCOLHA O EVENTO: ")
+    
+    
+    try:
+        #Pega o diretório atual e concatena o nome do arquivo a ser criado\aberto
+        #se houver espaços em branco no caminho absoluto, este deve ser passado 
+        #como string (entre aspas)
+        diretorioAtualPasta = "" + os.getcwd() + "/" + arquivo_matriculados + ""
+        
+        if arquivoExiste(diretorioAtualPasta):
+            #se o arquivo EXISTE, abre no modo APPEND, ou seja, um arquivo em branco, sem conteúdo
+            #ao final do arquivo.
+            fMatriculado = open(arquivo_matriculados, 'a')
+        else:
+            #O arquivo NÃO EXISTE, e será aberto no modo WRITE, ou seja, um arquivo
+            #em branco, sem conteúdo.
+            fMatriculado = open(arquivo_matriculados, 'w')
+            #escreve na primeira linha o nome das colunas que identifica as informações
+            nomeColunas = 'Nome do Aluno | Evento\n'
+            fMatriculado.write(nomeColunas)
+            
+        #o conteúdo do arquivo será gravado como uma string
+        linha = [aluno
+        , "|"
+        , evento
+        , "|"
+        ,"\n"]
+        #grava as informações do evento no arquivo.txt
+        informacoes = "".join(linha)
+        #Evento.write(repr(informacoes))
+        fMatriculado.write((f'{informacoes}'))
+        manipular_vaga_arquivo(evento, -1)
+        #OBRIGATORIAMENTE, depois de finalizados as operações de gravação, o
+        #arquivo deve ser FECHADO
+        fMatriculado.close()
+              
+    except Exception as erroArquivo:
+        print(f"Erro: {erroArquivo}")
+
+def desmatricular_aluno_arquivo(nomeInscrito):
+    registroArquivo = []
+    
+    try:
+        diretorioAtualPasta = "" + os.getcwd() + "/" + arquivo_matriculados + ""
+        
+        if arquivoExiste(diretorioAtualPasta):
+            #O Arquivo obrigatoriamente deverá ser aberto no modo LEITURA
+            with open(diretorioAtualPasta, "r") as registroDeMatriculado:
+                registroArquivo = registroDeMatriculado.readlines()
+                   
+            if (len(registroArquivo) > 0):
+                for indiceLinha in range(len(registroArquivo)):
+                    linha = registroArquivo[indiceLinha]
+                    infoMatricula = linha.split("|")
+                    evento = infoMatricula[1]
+                    
+                    if linha.find(nomeInscrito) >= 0:
+                        #Encontrou o aluno e excluiu da lista
+                        registroArquivo.pop(indiceLinha)
+                        
+            #trunca o arquivo e copia a lista pra dentro dele      
+            if (len(registroArquivo) > 0):
+                with open(diretorioAtualPasta, "w") as arquivoDeMatriculadoAlterado:
+                    arquivoDeMatriculadoAlterado.writelines(registroArquivo)
+            
+            manipular_vaga_arquivo(evento, 1)
+            return "Aluno desmatriculado com sucesso"    
+        else:
+            print("Erro! Não há arquivos.")
+        
+    except Exception as erroArquivo:
+        print(f'Erro na manipulação do Arquivo {erroArquivo}')
+        
+def manipular_vaga_arquivo(evento, quantidade):
+    registroArquivo = []
+    
+    try:
+        diretorioAtualPasta = "" + os.getcwd() + "/" + arquivo_eventos + ""
+        
+        if arquivoExiste(diretorioAtualPasta):
+            #O Arquivo obrigatoriamente deverá ser aberto no modo LEITURA
+            with open(diretorioAtualPasta, "r") as arquivoDeEvento:
+                registroArquivo = arquivoDeEvento.readlines()
+                   
+            if (len(registroArquivo) > 0):
+                for indiceLinha in range(len(registroArquivo)):
+                    linha = registroArquivo[indiceLinha]
+                    
+                    if linha.find(evento) >= 0:
+                        #Encontrou o evento e excluiu da lista
+                        infoEvento = linha.split("|")
+                        
+                        titulo = infoEvento[0]
+                        capacidade = int(infoEvento[1])
+                        limite = int(infoEvento[2])
+                        
+                        if quantidade > 0:
+                            if limite == capacidade:
+                                print("Não há vagas há remover")
+                            else:
+                                limite += quantidade
+                        elif quantidade < 0:
+                            if limite <= 0:
+                                print("Não há mais vagas disponiveis")
+                            else:
+                                limite += quantidade
+                            
+                        linhaEvento = [titulo
+                        , "|"
+                        , str(capacidade)
+                        , "|"
+                        , str(limite) #parametro que representa as vagas restantes
+                        ,"|\n"]
+                        #grava as informações do evento no arquivo.txt
+                        informacoes = "".join(linhaEvento)    
+                        
+                        registroArquivo[indiceLinha] = informacoes
+                        break
+                        
+            #trunca o arquivo e copia a lista pra dentro dele      
+            if (len(registroArquivo) > 0):
+                with open(diretorioAtualPasta, "w") as arquivoDeEventosAlterado:
+                    arquivoDeEventosAlterado.writelines(registroArquivo)
+            
+            return "Evento exclu[ido com sucesso"    
+        else:
+            print("Erro! Não há arquivos.")
+        
+    except Exception as erroArquivo:
+        print(f'Erro na manipulação do Arquivo {erroArquivo}')
+        
+    
+def exibir_menu(menuDeOpcoes): #ok
+    return menuDeOpcoes
+
+def escolha_do_menu(escolha): #ok
+    if escolha == '1':
+        return cadastrar_evento_arquivo()
+    
+    elif escolha == '2':
+        exibir_evento_arquivo()
+        nomeEvento = input("\nDIGITE O NOME DO EVENTO QUE VOCÊ DESEJA EXCLUIR: ")
+        return excluir_evento_arquivo(nomeEvento)
+    
+    elif escolha == '3':
+        return cadastrar_aluno_arquivo()
+    
+    elif escolha == '4':
+        exibir_aluno_arquivo()
+        nomeDoAluno = input("\nDIGITE O NOME DO ALUNO QUE VOCÊ DESEJA EXCLUIR: ")
+        return excluir_aluno_arquivo(nomeDoAluno)
+    
+    elif escolha == '5':
+        return matricular_aluno_arquivo()
+    
+    elif escolha == '6':
+        exibir_matriculado_arquivo
+        nomeMatriculado = input('\nDIGITE O NOME DO ALUNO QUE DESEJA DESMATRICULAR: ')
+        return desmatricular_aluno_arquivo(nomeMatriculado)     
+    
+    elif escolha == '7':
+        return exibir_evento_arquivo()
+    
+    elif escolha == '8':
+        return exibir_aluno_arquivo()
+    
+    elif escolha == '9':
+        return exibir_matriculado_arquivo(alunos_matriculados)
+    
+    elif escolha == '10':
+        return resumo(alunos_cadastrados, eventos_cadastrados, alunos_matriculados)
+    
+    else:
+        return 'ENTRADA INVÁLIDA.'
+
+def resumo(): #ok
+    print('\n\nLISTA DE ALUNOS CADASTRADOS:\n')
+    exibir_aluno_arquivo()
+    print('\nLISTA DE EVENTOS CADASTRADOS:\n')
+    exibir_evento_arquivo()
+    print('\nLISTA DE MATRICULADOS:\n')
+    exibir_matriculado_arquivo()    
+
+codigo_principal()
