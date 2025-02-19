@@ -74,7 +74,7 @@ df['Nome']
 ### Acessando Linhas
 Para acessar uma linha pelo índice:
 ```ipynb
-df.loc[1]
+df.loc(1)
 ```
 
 Podemos acessar várias linhas ao mesmo tempo:
